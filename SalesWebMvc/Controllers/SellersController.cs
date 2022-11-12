@@ -10,30 +10,29 @@ namespace SalesWebMvc.Controllers
 {
     public class SellersController : Controller
     {
-        private readonly SellerService _sellersService;
+        private readonly SellerService _sellerService;
 
-        public SellersController(SellerService sellersService)
+        public SellersController(SellerService sellerService)
         {
-            _sellersService = sellersService;
+            _sellerService = sellerService;
         }
         public IActionResult Index()
         {
-            var list = _sellersService.FildAll();
+            var list = _sellerService.FindAll();
             return View(list);
         }
+
         public IActionResult Create()
         {
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public IActionResult Create(Seller seller)
         {
-            _sellersService.Insert(seller);
+            _sellerService.Insert(seller);
             return RedirectToAction(nameof(Index));
-        }   
-            
-            
+        }
     }
 }
