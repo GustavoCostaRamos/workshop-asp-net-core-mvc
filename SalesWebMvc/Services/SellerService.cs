@@ -1,11 +1,14 @@
-﻿using SalesWebMvc.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using SalesWebMvc.Models;
+using SalesWebMvc.Models.ViewModels;
+using SalesWebMvc.Services;
 using SalesWebMvc.Services.Exceptions;
-
 namespace SalesWebMvc.Services
 {
     public class SellerService
@@ -50,7 +53,7 @@ namespace SalesWebMvc.Services
             _context.Update(obj);
             _context.SaveChanges();
             }
-            catch (DbupdateConcurrencyException e )
+            catch (DbUpdateConcurrencyException e )
             {
                 throw new DbConcurrencyException(e.Message);
             }
